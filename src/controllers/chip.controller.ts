@@ -32,7 +32,18 @@ export class ChipController implements IBaseController {
 
     async removeById(req: Request, res: Response, next: NextFunction) {
         try {
+            const chipId = req.query;
 
+            const result: boolean = new Chip().removeById(chipId);
+
+            if (!result) {
+                res.status(StatusCodes.BAD_REQUEST);
+            }
+
+            res.status(StatusCodes.OK).json({
+                message: "Returned <true> if Chip was deleted",
+                data: {status: result}
+            });
         } catch {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR);
         }

@@ -3,6 +3,7 @@ import { IChipDTO } from "../dto/chip.dto";
 export interface IChip {
     createOrUpdate(model: IChipDTO): IChipDTO;
     getAllByMapId(mapId: string): IChipDTO[];
+    removeById(chipId: string): boolean;
 }
 
 export interface IChipStorage {

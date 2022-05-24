@@ -14,6 +14,14 @@ export class Chip implements IChip {
         return this._storage.getStorage().filter(chip => chip.mapId === mapId);
     }
 
+    removeById(chipId: string): boolean {
+        if (!chipId) {
+            return false;
+        }
+
+        return this._storage.removeFromStorage(chipId);
+    }
+
     createOrUpdate(model: IChipDTO): IChipDTO {
         if (!model) {
             return null;
