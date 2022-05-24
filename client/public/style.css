@@ -1,3 +1,8 @@
-.categoryParams {
-  width: 140px;
+.vertical_line {
+  width: 1px;
+      background-color: silver;
+      height: 100%;
+      float: left;
+      border: 1px ridge silver ;
+      border-radius: 2px;
 }
