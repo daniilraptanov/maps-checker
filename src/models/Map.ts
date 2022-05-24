@@ -1,23 +1,43 @@
-import { IChipDTO } from "../types/dto/chip.dto";
 import { IMapDTO } from "../types/dto/map.dto";
 import { IMap, IMapStorage } from "../types/models/map.models";
+import { Chip } from "./Chip";
 
 
 export class Map implements IMap {
     constructor () {
-        this.storage = MapStorage.getInstance();
+        this._storage = MapStorage.getInstance();
     }
-    storage: IMapStorage;
 
-    id: string;
-    name: string;
-    chips: IChipDTO[];
+    private _storage: IMapStorage;
+
+    getAll(): IMapDTO[] {
+        const result = [];
+        
+        this._storage.getStorage().forEach(map => {
+            map.chips = new Chip().getAllByMapId(map.id)
+
+            result.push(map);
+        });
+
+        return result;
+    }
+
+    create(model: IMapDTO): IMapDTO {
+        if (!model || !model.id) {
+            return null;
+        }
+
+        this._storage.addToStorage(model);
+        return model;
+    }
 }
 
 class MapStorage implements IMapStorage {
-    private constructor () {}
+    private constructor () {
+        this._storage = [];
+    }
     private static _instance: IMapStorage;
-    private storage: IMapDTO[];
+    private _storage: IMapDTO[];
 
 
     static getInstance() {
@@ -28,12 +48,16 @@ class MapStorage implements IMapStorage {
         return MapStorage._instance;
     }
 
+    getStorage(): IMapDTO[] {
+        return this._storage;
+    }
+
     addToStorage(model: IMapDTO): boolean {
         if (!model) {
             return false;
         }
 
-        return this.storage.push(model) && true;
+        return this._storage.push(model) && true;
     }
 
     removeFromStorage(mapId: string): boolean {
@@ -41,7 +65,7 @@ class MapStorage implements IMapStorage {
             return false;
         }
 
-        this.storage = this.storage.filter(map => map.id !== mapId);
+        this._storage = this._storage.filter(map => map.id !== mapId);
         return true;
     }
 }

@@ -1,14 +1,10 @@
 import express from "express";
 import config from "../config";
-import API from "./routes/api-v1.routes";
 
 const app = express();
 
-const api_v1 = new API().registerEndpoints()
-
 app.use(express.json());
-app.use("/api/v1", api_v1);
-
+app.use("/api/v1", require("./routes/api-v1.routes"));
 
 app.listen(config.PORT, () => {
     try {

@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { sendResponse } from "../tools/response-handler.tools";
+import { StatusCodes } from "http-status-codes";
 
 export const apiSchemasBadRequest = (error, res: Response) => {
   if (!error) {
@@ -7,7 +7,11 @@ export const apiSchemasBadRequest = (error, res: Response) => {
   }
 
   if (!error.details[0].context.key) {
-    return sendResponse(res, 400, "An error occurred.")
+    return res.status(StatusCodes.BAD_REQUEST).json({
+      message: "An error occurred.",
+    });
   }
-  return sendResponse(res, 400, error.details[0].message)
+  return res.status(StatusCodes.BAD_REQUEST).json({
+    message: error.details[0].message,
+  });
 };

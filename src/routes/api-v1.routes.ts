@@ -4,34 +4,22 @@ import { API_ENDPOINTS } from "../types/enums/api-endpoints.enum";
 
 const { Router } = require("express");
 
-export default class API {
-    private static router = Router();
-    
-    registerEndpoints(): any {
-        this.maps();
-        this.chip();
+const router = Router();
 
-        return API.router;
-    }
+router.get(
+    "/maps",
+    controllerFactory(API_ENDPOINTS.MAPS).getAll
+);
 
-    private maps() {
-        API.router.get(
-            "/maps",
-            validateFactory(API_ENDPOINTS.MAPS).validate,
-            controllerFactory(API_ENDPOINTS.MAPS).getAll
-        );
-    }
+router.post(
+    "/chip",
+    validateFactory(API_ENDPOINTS.CHIPS).validate,
+    controllerFactory(API_ENDPOINTS.CHIPS).createOrUpdate
+);
 
-    private chip() {
-        API.router.post(
-            "/chip",
-            validateFactory(API_ENDPOINTS.CHIPS).validate,
-            controllerFactory(API_ENDPOINTS.CHIPS).createOrUpdate
-        );
+router.delete(
+    "/chip/:chipId",
+    controllerFactory(API_ENDPOINTS.CHIPS).removeById
+);
 
-        API.router.delete(
-            "/chip/:chipId",
-            controllerFactory(API_ENDPOINTS.CHIPS).removeById
-        );
-    }
-}
+module.exports = router;

@@ -3,5 +3,5 @@ export interface IChipDTO {
     name: string;
     level: number;
     isComplete: boolean;
-    mapId: string;
+    mapId?: string;
 }
