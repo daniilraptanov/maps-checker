@@ -17,33 +17,32 @@ export class ChipController implements IBaseController {
 
             if (!result) {
                 res.status(StatusCodes.BAD_REQUEST);
+            } else {
+                res.status(StatusCodes.OK).json({
+                    message: "Returned new or updated Chip",
+                    data: result
+                });
             }
 
-            res.status(StatusCodes.OK).json({
-                message: "Returned new or updated Chip",
-                data: result
-            });
-
-        } catch (err) {
-            console.log(err)
+        } catch {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR);
         }
     }
 
     async removeById(req: Request, res: Response, next: NextFunction) {
         try {
-            const chipId: string = req.query.chipId as string;
+            const chipId: string = req.params.chipId;
 
             const result: boolean = new Chip().removeById(chipId);
 
             if (!result) {
                 res.status(StatusCodes.BAD_REQUEST);
+            } else {
+                res.status(StatusCodes.OK).json({
+                    message: "Returned <true> if Chip was deleted",
+                    data: {status: result}
+                });
             }
-
-            res.status(StatusCodes.OK).json({
-                message: "Returned <true> if Chip was deleted",
-                data: {status: result}
-            });
         } catch {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR);
         }

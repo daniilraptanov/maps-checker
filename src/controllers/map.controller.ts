@@ -8,10 +8,14 @@ export class MapController implements IBaseController {
         try {
             const result = new Map().getAll();
 
-            res.status(StatusCodes.OK).json({
-                message: "Returned all maps",
-                data: result || []
-            });
+            if (!result) {
+                res.status(StatusCodes.BAD_REQUEST);
+            } else {
+                res.status(StatusCodes.OK).json({
+                    message: "Returned all maps",
+                    data: result || []
+                });
+            }
         } catch {
             res.status(StatusCodes.INTERNAL_SERVER_ERROR);
         }
