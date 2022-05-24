@@ -32,7 +32,7 @@ export class ChipController implements IBaseController {
 
     async removeById(req: Request, res: Response, next: NextFunction) {
         try {
-            const chipId = req.query;
+            const chipId: string = req.query.chipId as string;
 
             const result: boolean = new Chip().removeById(chipId);
 
