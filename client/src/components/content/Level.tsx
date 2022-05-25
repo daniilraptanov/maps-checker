@@ -9,7 +9,7 @@ interface LevelProps {
 
 const Level: FC<LevelProps> = (props) => {
   return (
-    <div className="col s2">
+    <div className="col s4">
     {props.data && props.data.chips.map(item => (
         item.level === props.level && (
           <div className="row">

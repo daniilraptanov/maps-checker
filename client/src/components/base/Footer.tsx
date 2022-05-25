@@ -14,7 +14,7 @@ const Footer: FC<FooterProps> = (props) => {
         icon={<Icon>add</Icon>}
         large
         node="button"
-        waves="light"
+        waves="blue"
 
         onClick={() => props.setIsCreateMap(true)}
     />

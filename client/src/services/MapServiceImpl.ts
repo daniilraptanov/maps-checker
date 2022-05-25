@@ -40,7 +40,7 @@ export class MapServiceImpl implements MapService {
             return 0;
         }
 
-        return this.Maps.find(map => map.id === mapId).chips.length;
+        return Math.max(...this.Maps.find(map => map.id === mapId).chips.map(chip => chip.level));
     }
 
     defineArrowsPoints(mapId: any, startLevel: number): { start: string; end: string; } {

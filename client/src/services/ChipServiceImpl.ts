@@ -19,7 +19,7 @@ export class ChipServiceImpl implements ChipService {
             return;
         }
 
-        return (await sendQuery("/chip"), "post", data)["data"];
+        return (await sendQuery("/chip", "post", data))["data"];
     }
 
     async removeChipById(chipId: string): Promise<boolean> {
@@ -27,7 +27,7 @@ export class ChipServiceImpl implements ChipService {
             return;
         }
 
-        const result = (await sendQuery(`/chip/${chipId}`), "delete")["data"];
+        const result = (await sendQuery(`/chip/${chipId}`, "delete"))["data"];
 
         return result["status"];
     }
