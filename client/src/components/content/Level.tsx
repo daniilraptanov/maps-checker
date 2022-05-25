@@ -1,19 +1,25 @@
 import React, { FC } from 'react';
+import { MapDTO } from '../../types/dto/MapDTO';
 import Chip from './Chip';
 
-const Level: FC = () => {
+interface LevelProps {
+  level: number;
+  data: MapDTO;
+}
+
+const Level: FC<LevelProps> = (props) => {
   return (
     <div className="col s2">
-        <div className="row">
-            <Chip />
-        </div>
-
-        {/* <VerticalLine /> */}
-
-        <div className="row">
-            <Chip />
-        </div>
-    </div>
+    {props.data && props.data.chips.map(item => (
+        item.level === props.level && (
+          <div className="row">
+              <span id={item.id}>
+                  <Chip data={item} />
+              </span>
+          </div>
+        )
+    ))}
+  </div>
   );
 };
 

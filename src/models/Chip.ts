@@ -48,7 +48,22 @@ export class Chip implements IChip {
 
 class ChipStorage implements IChipStorage {
     private constructor () {
-        this._storage = [];
+        this._storage = [
+            {
+                id: "cdc08dac-dd15-48f5-9aab-48115ac7b71d",
+                name: "Test Map",
+                level: 0,
+                isComplete: false,
+                mapId: "0b700802-ebe2-4a34-8a35-8cf3995aa814"
+            },
+            {
+                id: "e63d0d7d-e507-4bee-b415-9a606fd54ab2",
+                name: "Second Chip",
+                level: 1,
+                isComplete: false,
+                mapId: "0b700802-ebe2-4a34-8a35-8cf3995aa814"
+            }
+        ];
     }
     private static _instance: IChipStorage;
     private _storage: IChipDTO[];

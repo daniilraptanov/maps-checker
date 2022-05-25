@@ -1,7 +1,11 @@
 import React, { FC } from 'react';
 import { Button, Icon } from 'react-materialize';
 
-const Footer: FC = () => {
+interface FooterProps {
+  setIsCreateMap(value: boolean): void;
+}
+
+const Footer: FC<FooterProps> = (props) => {
   return (
     <Button
         className="blue"
@@ -11,6 +15,8 @@ const Footer: FC = () => {
         large
         node="button"
         waves="light"
+
+        onClick={() => props.setIsCreateMap(true)}
     />
   );
 };

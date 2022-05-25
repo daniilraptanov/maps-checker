@@ -1,49 +1,41 @@
 import React, { FC } from 'react';
-import Xarrow, {useXarrow, Xwrapper} from "react-xarrows";
+import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
 import { CollapsibleItem, Icon } from 'react-materialize';
-import Chip from './Chip';
+import { MapDTO } from '../../types/dto/MapDTO';
+import Level from './Level';
+import { MapServiceImpl } from '../../services/MapServiceImpl';
 
 
-const Map: FC = () => {
-  const updateXarrow = useXarrow();
+interface MapProps {
+    data: MapDTO;
+}
 
-  return (
-    <CollapsibleItem
-        expanded={false}
-        header="Map-1"
-        icon={<Icon>map</Icon>}
-        node="div"
-    >
-      <div className="row">
-          <Xwrapper>
-              <div className="col s2">
-                  <div className="row">
-                      <span id="0">
-                          <Chip />
-                      </span>
-                  </div>
+const Map: FC<MapProps> = (props) => {
+    const updateXarrow = useXarrow();
+    const mapService = MapServiceImpl.getInstance();
+    const arrowPoints = mapService.defineArrowsPoints(props.data.id, 0);
 
-                  <div className="row">
-                      <span id="3">
-                          <Chip />
-                      </span>
-                  </div>
-              </div>
+    return (
+        <CollapsibleItem
+            expanded={false}
+            header={props.data ? props.data.name : "New Map"}
+            icon={<Icon>map</Icon>}
+            node="div"
+            onSelect={() => updateXarrow()}
+        >
+        <div className="row">
+            <Xwrapper>
+                <Level data={props.data} level={0} />
+                <Level data={props.data} level={1} />
 
-              <div className="col s2" id="1">
-                  <span id="1">
-                      <Chip />
-                  </span>
-              </div>
-
-              <Xarrow
-                start="0"
-                end="1"
-              />
-          </Xwrapper>
-      </div>
-    </CollapsibleItem>
-  );
+                <Xarrow
+                    start={arrowPoints.start}
+                    end={arrowPoints.end}
+                />
+            </Xwrapper>
+        </div>
+        </CollapsibleItem>
+    );
 };
 
 export default Map;

@@ -34,7 +34,11 @@ export class Map implements IMap {
 
 class MapStorage implements IMapStorage {
     private constructor () {
-        this._storage = [];
+        this._storage = [{
+            id: "0b700802-ebe2-4a34-8a35-8cf3995aa814",
+            name: "Test Map",
+            chips: []
+        }];
     }
     private static _instance: IMapStorage;
     private _storage: IMapDTO[];

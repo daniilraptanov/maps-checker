@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import Container from './base/Container';
-import Footer from './base/Footer';
 import Header from './base/Header';
 
 const App: FC = () => {
@@ -8,7 +7,6 @@ const App: FC = () => {
     <>
       <Header />
       <Container />
-      <Footer />
     </>
   );
 };

@@ -1,18 +1,41 @@
-import React, { FC } from 'react';
+import React, { FC, useEffect, useState } from 'react';
 import { Collapsible } from 'react-materialize';
+import { MapServiceImpl } from '../../services/MapServiceImpl';
+import { MapDTO } from '../../types/dto/MapDTO';
 import Map from '../content/Map';
+import Footer from './Footer';
 
 const Container: FC = () => {
-return (
-    <Collapsible
-        accordion
-        popout
-    >
-        <Map />
-        {/* <Map />
-        <Map /> */}
-    </Collapsible>
-)
+    const [maps, setMaps] = useState<MapDTO[]>(null);
+    const [isCreateMap, setIsCreateMap] = useState<boolean>(false);
+
+    useEffect(() => {
+        const setData = async () => {
+            const mapService = MapServiceImpl.getInstance();
+
+            const maps = await mapService.getCachedMaps();
+            setMaps(maps);
+        };
+
+        setData();
+    });
+
+    return (
+        <>
+            <Collapsible
+                accordion
+                popout
+            >
+                {maps && maps.map(element => (
+                    <Map data={element} />
+                ))}
+
+                {isCreateMap && <Map data={null} />}
+            </Collapsible>
+
+            <Footer setIsCreateMap={setIsCreateMap} />
+        </>
+    )
 };
 
 export default Container;

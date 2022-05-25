@@ -1,7 +1,7 @@
 import { SendQueryType } from "../types/tools/ResponseInterfaces";
 
 export async function sendQuery(
-  url: string = "/category/getAll",
+  url: string = "/maps",
   method: string = "get",
   body = null,
   headers = {}
