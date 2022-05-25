@@ -36,10 +36,18 @@ export class MapServiceImpl implements MapService {
     }
 
     getTotalLevels(mapId: string): number {
+        if (!mapId) {
+            return 0;
+        }
+
         return this.Maps.find(map => map.id === mapId).chips.length;
     }
 
     defineArrowsPoints(mapId: any, startLevel: number): { start: string; end: string; } {
+        if (!mapId || !startLevel) {
+            return;
+        } 
+
         const map = this.Maps.find(map => map.id === mapId);
 
         return {

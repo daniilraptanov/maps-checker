@@ -23,16 +23,21 @@ export class Chip implements IChip {
     }
 
     createOrUpdate(model: IChipDTO): IChipDTO {
-        if (!model) {
+        if (!model || (model.level === 0 && model.mapId)) {
             return null;
         }
+
+        const id = uuidv4();
+        const mapId = uuidv4();
 
         if (model.id) {
             this._storage.updateFromStorage(model);
         } else {
-            model.id = uuidv4();
-            model.mapId = uuidv4();
-            this._storage.addToStorage(model);
+            this._storage.addToStorage({
+                ...model, 
+                id: id,
+                mapId: model.mapId || mapId
+            });
         }
  
         if (model.level === 0) {
@@ -42,7 +47,11 @@ export class Chip implements IChip {
             })
         }
 
-        return model;
+        return {
+            ...model,
+            id: model.id || id,
+            mapId: model.mapId || mapId
+        };
     }
 }
 
@@ -62,7 +71,7 @@ class ChipStorage implements IChipStorage {
                 level: 1,
                 isComplete: false,
                 mapId: "0b700802-ebe2-4a34-8a35-8cf3995aa814"
-            }
+            },
         ];
     }
     private static _instance: IChipStorage;

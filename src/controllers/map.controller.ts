@@ -9,7 +9,7 @@ export class MapController implements IBaseController {
             const result = new Map().getAll();
 
             if (!result) {
-                res.status(StatusCodes.BAD_REQUEST);
+                res.status(StatusCodes.BAD_REQUEST).send("Client Error");
             } else {
                 res.status(StatusCodes.OK).json({
                     message: "Returned all maps",
@@ -17,7 +17,7 @@ export class MapController implements IBaseController {
                 });
             }
         } catch {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
         }
     }
 

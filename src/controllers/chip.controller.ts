@@ -16,7 +16,7 @@ export class ChipController implements IBaseController {
             const result = new Chip().createOrUpdate(data);
 
             if (!result) {
-                res.status(StatusCodes.BAD_REQUEST);
+                res.status(StatusCodes.BAD_REQUEST).send("Client Error");
             } else {
                 res.status(StatusCodes.OK).json({
                     message: "Returned new or updated Chip",
@@ -25,7 +25,7 @@ export class ChipController implements IBaseController {
             }
 
         } catch {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
         }
     }
 
@@ -36,7 +36,7 @@ export class ChipController implements IBaseController {
             const result: boolean = new Chip().removeById(chipId);
 
             if (!result) {
-                res.status(StatusCodes.BAD_REQUEST);
+                res.status(StatusCodes.BAD_REQUEST).send("Client Error");
             } else {
                 res.status(StatusCodes.OK).json({
                     message: "Returned <true> if Chip was deleted",
@@ -44,7 +44,7 @@ export class ChipController implements IBaseController {
                 });
             }
         } catch {
-            res.status(StatusCodes.INTERNAL_SERVER_ERROR);
+            res.status(StatusCodes.INTERNAL_SERVER_ERROR).send("Server Error");
         }
     }
 }
