@@ -3,6 +3,8 @@ import { Button, Modal, TextInput } from 'react-materialize';
 import { ChipServiceImpl } from '../../services/ChipServiceImpl';
 import { ChipService } from '../../types/services/ChipService';
 import useMessage from '../../tools/hooks/useMessage'
+import { MapService } from '../../types/services/MapService';
+import { MapServiceImpl } from '../../services/MapServiceImpl';
 
 interface NewChipModalProps {
     mapId: string;
@@ -11,6 +13,7 @@ interface NewChipModalProps {
 
 const NewChipModal: FC<NewChipModalProps> = (props) => {
     const chipService: ChipService = ChipServiceImpl.getInstance();
+    const mapService: MapService = MapServiceImpl.getInstance();
 
     const message = useMessage();
     const [newChip, setNewChip] = useState<{name: string, level: number}>({
@@ -32,6 +35,8 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
             isComplete: false,
             mapId: props.mapId
         });
+
+        mapService.notifyMapServiceImpl(await mapService.getCachedMaps());
 
         message(result ? "Created!" : "Error!");
     }
