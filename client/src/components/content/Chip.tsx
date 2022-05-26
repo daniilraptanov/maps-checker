@@ -26,6 +26,7 @@ const Chip: FC<ChipProps> = (props) => {
 
     const createOrUpdateChip = async (name: string, isComplete: boolean): Promise<any> => {
         const result = await chipService.createOrUpdateChip({
+            id: props.data.id || "",
             name: name,
             level: props.data.level,
             isComplete: isComplete,
@@ -54,9 +55,7 @@ const Chip: FC<ChipProps> = (props) => {
             onChipSelect: async () => await createOrUpdateChip(props.data.name, true),
             onChipDelete: async () => await removeChip(props.data)
           }}
-      >
-        {props.data ? props.data.name : ""}
-      </MChip>
+      />
     );
   };
 
