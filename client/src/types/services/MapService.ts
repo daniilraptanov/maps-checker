@@ -8,6 +8,7 @@ export interface MapService {
     updateMaps(): Promise<MapDTO[]>;
 
     addChipToCachedMap(chip: ChipDTO): boolean;
+    updateChipFromCachedMap(chip: ChipDTO): boolean;
     removeChipFromCachedMap(chip: ChipDTO): boolean;
 
     getTotalLevels(mapId: string): number;

@@ -78,6 +78,24 @@ export class MapServiceImpl implements MapService {
         return true;
     }
 
+    updateChipFromCachedMap(chip: ChipDTO): boolean {
+        if (!chip.id || !chip.mapId) {
+            return;
+        }
+
+        this._maps.forEach(map => {
+            if (map.id  === chip.mapId) {
+                map.chips.forEach(element => {
+                    if (element.id === chip.id) {
+                        element.isComplete = chip.isComplete;
+                    }
+                });
+            }
+        });
+
+        return true;
+    }
+
     removeChipFromCachedMap(chip: ChipDTO): boolean {
         if (!chip.id || !chip.mapId) {
             return;

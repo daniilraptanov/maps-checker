@@ -26,7 +26,8 @@ export class ChipServiceImpl implements ChipService {
 
         const result = (await sendQuery("/chip", "post", data))["data"];
 
-        const addedChip = this.mapService.addChipToCachedMap(result);
+        const addedChip = !data.isComplete ? this.mapService.addChipToCachedMap(result) : 
+                                             this.mapService.updateChipFromCachedMap(result);
         if (!addedChip) {
             return;
         }

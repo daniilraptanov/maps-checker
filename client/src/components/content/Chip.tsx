@@ -24,17 +24,21 @@ const Chip: FC<ChipProps> = (props) => {
         message(result ? "Deleted!" : "Error!");
     }
 
-    const createOrUpdateChip = async (name: string): Promise<void> => {
-      const result = await chipService.createOrUpdateChip({
-          name: name,
-          level: props.data.level,
-          isComplete: false,
-          mapId: props.data.mapId
-      });
+    const createOrUpdateChip = async (name: string, isComplete: boolean): Promise<any> => {
+        const result = await chipService.createOrUpdateChip({
+            name: name,
+            level: props.data.level,
+            isComplete: isComplete,
+            mapId: props.data.mapId
+        });
 
-      mapService.notifyMapServiceImpl(await mapService.getCachedMaps());
+        mapService.notifyMapServiceImpl(await mapService.getCachedMaps());
 
-      message(result ? "Created!" : "Error!");
+        if (!isComplete) {
+            return message(result ? "Created!" : "Error!");
+        }
+        message(result ? "Updated!" : "Error");
+        
     }
 
     return (
@@ -46,8 +50,8 @@ const Chip: FC<ChipProps> = (props) => {
               {tag: props.data ? props.data.name : ""}
             ],
             limit: props.data.level === 0 ? 1 : 2,
-            onChipAdd: async (val) => await createOrUpdateChip(val[0].M_Chips.chipsData[1].tag),
-            onChipSelect: () => {console.log("select!")},
+            onChipAdd: async (val) => await createOrUpdateChip(val[0].M_Chips.chipsData[1].tag, false),
+            onChipSelect: async () => await createOrUpdateChip(props.data.name, true),
             onChipDelete: async () => await removeChip(props.data)
           }}
       >
