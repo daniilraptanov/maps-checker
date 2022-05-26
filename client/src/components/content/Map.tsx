@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
-import { CollapsibleItem, Icon } from 'react-materialize';
+import { CollapsibleItem, Icon, Switch } from 'react-materialize';
 import { MapDTO } from '../../types/dto/MapDTO';
 import Level from './Level';
 import { MapServiceImpl } from '../../services/MapServiceImpl';
@@ -34,13 +34,27 @@ const Map: FC<MapProps> = (props) => {
                 <Level data={props.data} level={1} />
                 <Level data={props.data} level={2} />
 
-                {arrowPoints && <Xarrow
+                {/* {arrowPoints && <Xarrow
                     start={arrowPoints.start}
                     end={arrowPoints.end}
-                /> }
+                /> } */}
             </Xwrapper>
         </div>
-        { totalLevels < 3 && <NewChipModal mapId={props.data.id} minLevel={2} /> }
+
+        <div className="row">
+            <div className="col 21">
+                { totalLevels < 3 && <NewChipModal mapId={props.data.id} minLevel={2} /> }
+            </div>
+
+            <div className="col s2" style={{marginTop : "5px"}}>
+                <Switch
+                    id="Switch-20"
+                    offLabel="edit"
+                    onChange={function noRefCheck(){}}
+                    onLabel="view"
+                />
+            </div>
+        </div>
         </CollapsibleItem>
     );
 };

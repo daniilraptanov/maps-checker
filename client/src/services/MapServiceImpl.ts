@@ -52,7 +52,7 @@ export class MapServiceImpl implements MapService {
     }
 
     defineArrowsPoints(mapId: any, startLevel: number): { start: string; end: string; } {
-        if (!mapId || !startLevel) {
+        if (!mapId || startLevel === null || startLevel === undefined) {
             return;
         } 
 
