@@ -42,7 +42,7 @@ export class Chip implements IChip {
  
         if (model.level === 0) {
             new Map().create({
-                id: model.mapId,
+                id: mapId,
                 name: model.name,
             })
         }
