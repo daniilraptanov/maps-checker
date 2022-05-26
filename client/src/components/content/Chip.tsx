@@ -26,7 +26,7 @@ const Chip: FC<ChipProps> = (props) => {
 
     const createOrUpdateChip = async (name: string, isComplete: boolean): Promise<any> => {
         const result = await chipService.createOrUpdateChip({
-            id: props.data.id || "",
+            id: isComplete ? props.data.id : "",
             name: name,
             level: props.data.level,
             isComplete: isComplete,
