@@ -24,12 +24,14 @@ export class ChipServiceImpl implements ChipService {
             return;
         }
 
-        const addedChip = this.mapService.addChipToCachedMap(data);
+        const result = (await sendQuery("/chip", "post", data))["data"];
+
+        const addedChip = this.mapService.addChipToCachedMap(result);
         if (!addedChip) {
             return;
         }
 
-        return (await sendQuery("/chip", "post", data))["data"];
+        return result;
     }
 
     async removeChipById(data: ChipDTO): Promise<boolean> {
