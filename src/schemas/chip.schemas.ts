@@ -5,5 +5,5 @@ export const chipSchema = Joi.object({
     name: Joi.string().required(),
     level: Joi.number().required(),
     isComplete: Joi.boolean().required(),
-    mapId: Joi.string()
+    mapId: Joi.string().allow("")
 });

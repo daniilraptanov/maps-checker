@@ -33,7 +33,7 @@ const Map: FC<MapProps> = (props) => {
 
         <div className="row">
             <div className="col 21">
-                { totalLevels < 3 && <NewChipModal mapId={props.data?.id || ""} minLevel={2} /> }
+                { totalLevels < 3 && <NewChipModal mapId={props.data?.id || ""} minLevel={props.data ? 2 : 1} /> }
             </div>
 
             <div className="col s2" style={{marginTop : "5px"}}>
