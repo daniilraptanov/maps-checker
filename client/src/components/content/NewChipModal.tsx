@@ -32,7 +32,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
     const createOrUpdateChip = async (name: string, level: number): Promise<void> => {
         const result = await chipService.createOrUpdateChip({
             name: name,
-            level: level - 1,
+            level: props.minLevel > 1 ? level - 1 : 0,
             isComplete: false,
             mapId: props.mapId
         });
@@ -73,10 +73,10 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
             onChange={(val) => newChipHandelChange(val.nativeEvent, newChip.level)}
         />
 
-        Choice {props.minLevel > 1 ? "chip" : "first"}-level ({props.minLevel > 1 ? newChip.level : "1"})
+        Choice {props.minLevel > 1 ? "chip" : "first"}-level ({props.minLevel > 1 ? newChip.level : props.minLevel})
         <input 
             type="range" 
-            min={props.minLevel.toString()} 
+            min={props.minLevel.toString()}
             max={props.minLevel > 1 ? 3 : props.minLevel.toString()} 
             onChange={(val) => newChipHandelChange(newChip.name, parseInt(val.target.value))}
         />
