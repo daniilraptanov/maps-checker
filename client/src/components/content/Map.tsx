@@ -13,6 +13,7 @@ interface MapProps {
     data: MapDTO;
     isViewMode: boolean;
     setIsViewMode(value: boolean): void;
+    setIsCreateMap(value: boolean): void;
 }
 
 const Map: FC<MapProps> = (props) => {
@@ -33,7 +34,7 @@ const Map: FC<MapProps> = (props) => {
 
         <div className="row">
             <div className="col 21">
-                { totalLevels < 3 && <NewChipModal mapId={props.data?.id || ""} minLevel={props.data ? 2 : 1} /> }
+                { totalLevels < 3 && <NewChipModal mapId={props.data?.id || ""} minLevel={props.data ? 2 : 1} setIsCreateMap={props.setIsCreateMap} /> }
             </div>
 
             <div className="col s2" style={{marginTop : "5px"}}>

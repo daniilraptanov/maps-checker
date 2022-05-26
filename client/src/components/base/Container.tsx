@@ -28,10 +28,10 @@ const Container: FC = () => {
                 popout
             >
                 {maps && maps.map(element => (
-                    <Map data={element} isViewMode={isViewMode} setIsViewMode={setIsViewMode} />
+                    <Map data={element} isViewMode={isViewMode} setIsViewMode={setIsViewMode} setIsCreateMap={setIsCreateMap} />
                 ))}
 
-                {isCreateMap && <Map data={null} isViewMode={isViewMode} setIsViewMode={setIsViewMode} />}
+                {isCreateMap && <Map data={null} isViewMode={isViewMode} setIsViewMode={setIsViewMode} setIsCreateMap={setIsCreateMap} />}
             </Collapsible>
 
             <Footer setIsCreateMap={setIsCreateMap} />

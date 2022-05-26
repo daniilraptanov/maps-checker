@@ -9,6 +9,7 @@ import { MapServiceImpl } from '../../services/MapServiceImpl';
 interface NewChipModalProps {
     mapId: string;
     minLevel: number;
+    setIsCreateMap(value: boolean): void;
 }
 
 const NewChipModal: FC<NewChipModalProps> = (props) => {
@@ -38,6 +39,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
 
         mapService.notifyMapServiceImpl(await mapService.getCachedMaps());
 
+        props.setIsCreateMap(false);
         message(result ? "Created!" : "Error!");
     }
 
