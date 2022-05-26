@@ -51,16 +51,20 @@ export class MapServiceImpl implements MapService {
         return Math.max(...this._maps.find(map => map.id === mapId).chips.map(chip => chip.level));
     }
 
-    defineArrowsPoints(mapId: any, startLevel: number): { start: string; end: string; } {
+    defineArrowsPoints(mapId: string, startLevel: number): { start: string; end: string[]; } {
         if (!mapId || startLevel === null || startLevel === undefined) {
             return;
         } 
 
         const map = this._maps.find(map => map.id === mapId);
 
+        const start = map.chips.filter(chip => chip.level === startLevel)[0];
+        const end =  map.chips.filter(chip => chip.level === startLevel + 1).map(el => el.id);
+
+
         return {
-            start: map.chips.filter(chip => chip.level === startLevel)[0].id,
-            end: map.chips.filter(chip => chip.level === startLevel + 1)[0].id
+            start: end ? start.id : "",
+            end: end ? end : [""]
         }
     }
 

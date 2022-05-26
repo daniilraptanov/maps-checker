@@ -1,12 +1,12 @@
 import React, { FC } from 'react';
-import Xarrow, { useXarrow, Xwrapper } from "react-xarrows";
+import  { useXarrow } from "react-xarrows";
 import { CollapsibleItem, Icon, Switch } from 'react-materialize';
 import { MapDTO } from '../../types/dto/MapDTO';
-import Level from './Level';
 import { MapServiceImpl } from '../../services/MapServiceImpl';
 import { MapService } from '../../types/services/MapService';
 import NewChipModal from './NewChipModal';
 import EditMode from './EditMode';
+import ViewMode from './ViewMode';
 
 
 interface MapProps {
@@ -17,10 +17,7 @@ interface MapProps {
 
 const Map: FC<MapProps> = (props) => {
     const mapService: MapService = MapServiceImpl.getInstance();
-
-    const arrowPoints = mapService.defineArrowsPoints(props.data?.id || "", 0);
     const totalLevels = mapService.getTotalLevels(props.data?.id || "");
-
     const updateXarrow = useXarrow();
 
     return (
@@ -32,7 +29,7 @@ const Map: FC<MapProps> = (props) => {
             onSelect={() => updateXarrow()}
         >
         
-        { !props.isViewMode ? <EditMode data={props.data} /> : <></> }
+        { !props.isViewMode ? <EditMode data={props.data} /> : <ViewMode data={props.data} /> }
 
         <div className="row">
             <div className="col 21">
@@ -43,7 +40,10 @@ const Map: FC<MapProps> = (props) => {
                 <Switch
                     id="Switch-20"
                     offLabel="edit"
-                    onChange={() => [props.setIsViewMode(!props.isViewMode)]}
+                    onChange={() => {
+                        props.setIsViewMode(!props.isViewMode);
+                        updateXarrow();
+                    }}
                     onLabel="view"
                 />
             </div>
@@ -54,8 +54,3 @@ const Map: FC<MapProps> = (props) => {
 
 export default Map;
 
-
-// {/* {arrowPoints && <Xarrow
-//                     start={arrowPoints.start}
-//                     end={arrowPoints.end}
-//                 /> } */}

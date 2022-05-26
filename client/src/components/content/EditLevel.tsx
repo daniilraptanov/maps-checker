@@ -2,18 +2,18 @@ import React, { FC } from 'react';
 import { MapDTO } from '../../types/dto/MapDTO';
 import Chip from './Chip';
 
-interface LevelProps {
+interface EditLevelProps {
   level: number;
   data: MapDTO;
 }
 
-const Level: FC<LevelProps> = (props) => {
+const EditLevel: FC<EditLevelProps> = (props) => {
   return (
     <div className="col s4">
     {props.data && props.data.chips.map(item => (
         item.level === props.level && (
           <div className="row">
-              <span id={item.id}>
+              <span>
                   <Chip data={item} />
               </span>
           </div>
@@ -23,4 +23,4 @@ const Level: FC<LevelProps> = (props) => {
   );
 };
 
-export default Level;
+export default EditLevel;

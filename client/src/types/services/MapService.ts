@@ -12,8 +12,8 @@ export interface MapService {
     removeChipFromCachedMap(chip: ChipDTO): boolean;
 
     getTotalLevels(mapId: string): number;
-    defineArrowsPoints(mapId, startLevel: number): {
+    defineArrowsPoints(mapId: string, startLevel: number): {
         start: string;
-        end: string;
+        end: string[];
     };
 }
