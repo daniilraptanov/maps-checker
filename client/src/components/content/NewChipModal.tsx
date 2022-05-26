@@ -44,7 +44,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
     return (
         <Modal
             actions={[
-                <Button flat modal="close" node="button" waves="green">BACK</Button>
+                <Button flat modal="close" node="button" waves="light">BACK</Button>
             ]}
             bottomSheet={false}
             fixedFooter={false}
@@ -62,7 +62,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
             }}
             trigger={<Button 
                         node="button"
-                        waves="green"
+                        waves="light"
                         flat>ADD</Button>}
     >
         <TextInput
@@ -84,7 +84,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
                 className="col s1"
                 flat
                 node="button"
-                waves="green"
+                waves="light"
                 onClick={() => createOrUpdateChip(newChip.name, newChip.level)}
             >SEND</Button> 
         </div>
