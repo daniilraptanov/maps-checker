@@ -50,7 +50,7 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
             ]}
             bottomSheet={false}
             fixedFooter={false}
-            header="Create chip"
+            header={props.minLevel > 1 ? "Create chip" : "Create new map" }
             id="Modal-10"
             open={false}
             options={{
@@ -73,11 +73,11 @@ const NewChipModal: FC<NewChipModalProps> = (props) => {
             onChange={(val) => newChipHandelChange(val.nativeEvent, newChip.level)}
         />
 
-        Choice chip-level ({newChip.level})
+        Choice {props.minLevel > 1 ? "chip" : "first"}-level ({props.minLevel > 1 ? newChip.level : "1"})
         <input 
             type="range" 
             min={props.minLevel.toString()} 
-            max={3} 
+            max={props.minLevel > 1 ? 3 : props.minLevel.toString()} 
             onChange={(val) => newChipHandelChange(newChip.name, parseInt(val.target.value))}
         />
 
