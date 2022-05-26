@@ -5,8 +5,8 @@ import { MapDTO } from '../../types/dto/MapDTO';
 import { MapServiceImpl } from '../../services/MapServiceImpl';
 import { MapService } from '../../types/services/MapService';
 import NewChipModal from './NewChipModal';
-import EditMode from './EditMode';
-import ViewMode from './ViewMode';
+import EditMode from './edit/EditMode';
+import ViewMode from './view/ViewMode';
 
 
 interface MapProps {

@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { MapDTO } from '../../types/dto/MapDTO';
-import Arrows from './arrows/Arrows';
+import { MapDTO } from '../../../types/dto/MapDTO';
+import Arrows from '../arrows/Arrows';
 
 interface ViewLevelProps {
   level: number;

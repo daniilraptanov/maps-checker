@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
 import { Xwrapper } from "react-xarrows";
-import { MapDTO } from '../../types/dto/MapDTO';
+import { MapDTO } from '../../../types/dto/MapDTO';
 import EditLevel from './EditLevel';
 
 interface EditModeProps {

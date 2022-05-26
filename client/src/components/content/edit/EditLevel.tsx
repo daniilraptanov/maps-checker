@@ -1,6 +1,6 @@
 import React, { FC } from 'react';
-import { MapDTO } from '../../types/dto/MapDTO';
-import Chip from './Chip';
+import { MapDTO } from '../../../types/dto/MapDTO';
+import Chip from '../Chip';
 
 interface EditLevelProps {
   level: number;
