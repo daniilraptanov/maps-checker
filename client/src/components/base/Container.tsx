@@ -8,6 +8,7 @@ import Footer from './Footer';
 const Container: FC = () => {
     const [maps, setMaps] = useState<MapDTO[]>(null);
     const [isCreateMap, setIsCreateMap] = useState<boolean>(false);
+    const [isViewMode, setIsViewMode] = useState<boolean>(false);
 
     useEffect(() => {
         const setData = async () => {
@@ -27,10 +28,10 @@ const Container: FC = () => {
                 popout
             >
                 {maps && maps.map(element => (
-                    <Map data={element} />
+                    <Map data={element} isViewMode={isViewMode} setIsViewMode={setIsViewMode} />
                 ))}
 
-                {isCreateMap && <Map data={null} />}
+                {isCreateMap && <Map data={null} isViewMode={isViewMode} setIsViewMode={setIsViewMode} />}
             </Collapsible>
 
             <Footer setIsCreateMap={setIsCreateMap} />

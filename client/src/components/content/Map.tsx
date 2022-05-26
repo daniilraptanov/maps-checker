@@ -6,10 +6,13 @@ import Level from './Level';
 import { MapServiceImpl } from '../../services/MapServiceImpl';
 import { MapService } from '../../types/services/MapService';
 import NewChipModal from './NewChipModal';
+import EditMode from './EditMode';
 
 
 interface MapProps {
     data: MapDTO;
+    isViewMode: boolean;
+    setIsViewMode(value: boolean): void;
 }
 
 const Map: FC<MapProps> = (props) => {
@@ -28,18 +31,8 @@ const Map: FC<MapProps> = (props) => {
             node="div"
             onSelect={() => updateXarrow()}
         >
-        <div className="row">
-            <Xwrapper>
-                <Level data={props.data} level={0} />
-                <Level data={props.data} level={1} />
-                <Level data={props.data} level={2} />
-
-                {/* {arrowPoints && <Xarrow
-                    start={arrowPoints.start}
-                    end={arrowPoints.end}
-                /> } */}
-            </Xwrapper>
-        </div>
+        
+        { !props.isViewMode ? <EditMode data={props.data} /> : <></> }
 
         <div className="row">
             <div className="col 21">
@@ -50,7 +43,7 @@ const Map: FC<MapProps> = (props) => {
                 <Switch
                     id="Switch-20"
                     offLabel="edit"
-                    onChange={function noRefCheck(){}}
+                    onChange={() => [props.setIsViewMode(!props.isViewMode)]}
                     onLabel="view"
                 />
             </div>
@@ -60,3 +53,9 @@ const Map: FC<MapProps> = (props) => {
 };
 
 export default Map;
+
+
+// {/* {arrowPoints && <Xarrow
+//                     start={arrowPoints.start}
+//                     end={arrowPoints.end}
+//                 /> } */}
