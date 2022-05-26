@@ -1,4 +1,5 @@
 import React, { FC } from 'react';
+import { Button } from 'react-materialize';
 import { MapDTO } from '../../../types/dto/MapDTO';
 import Arrows from '../arrows/Arrows';
 
@@ -14,7 +15,14 @@ const ViewLevel: FC<ViewLevelProps> = (props) => {
                 item.level === props.level && (
                 <div className="row">
                     <span id={item.id}>
+                    <Button
+                        className={`${item.isComplete ? "green" : "red"}`}
+                        node="button"
+                        style={{
+                        }}
+                    >
                         {item.name}
+                    </Button>
                     </span>
                 </div>
                 )
