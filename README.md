@@ -7,7 +7,7 @@ const config = {
 export default config;
 
 
-scripts =>
+scripts:
     npm run client => run only client
     npm run server => run only api
     npm run dev => run client & api
