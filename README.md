@@ -17,4 +17,4 @@ npm run server => run only api;
 
 npm run dev => run client & api;
 
-npm run test => run tests (before start api);
+npm run test => run tests (after starting api);
