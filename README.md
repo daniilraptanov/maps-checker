@@ -1,11 +1,11 @@
 ﻿# maps-checker
 
-config.ts
-    const config = {
-        PORT: 5000
-    }
+config.ts:
 
-    export default config;
+const config = {
+    PORT: 5000
+}
+export default config;
 
 
 scripts =>
