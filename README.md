@@ -1,7 +1,6 @@
 ﻿# maps-checker
 
 config.ts:
-
 const config = {
     PORT: 5000
 };
